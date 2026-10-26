@@ -2,12 +2,13 @@ import {
   createBrowserRouter,
 } from "react-router";
 
-import { MainLayout } from "./components/MainLayout";
-import { HomePage } from "./components/pages/HomePage";
-import { SearchPage } from "./components/pages/SearchPage";
-import { MediaDetailsPage } from "./components/pages/MediaDetailsPage";
-import { FavouritesPage } from "./components/pages/FavouritesPage";
-import { WatchlistPage } from "./components/pages/WatchlistPage";
+import { MainLayout } from "./MainLayout";
+import { HomePage } from "./pages/HomePage";
+import { SearchPage } from "./pages/SearchPage";
+import { MediaDetailsPage } from "./pages/MediaDetailsPage";
+import { FavouritesPage } from "./pages/FavouritesPage";
+import { WatchlistPage } from "./pages/WatchlistPage";
+
 
 
 
