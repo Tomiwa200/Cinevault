@@ -1,11 +1,29 @@
-export type MediaType = "movie" | "tv";
 
-export interface MediaCardData {
+export interface Movie {
   id: number;
-  mediaType: MediaType;
   title: string;
   overview: string;
-  posterPath: string | null;
-  releaseDate: string | null;
-  rating: number;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  release_date: string;
+  vote_average: number;
+  genresIds: number[];
+}
+
+export interface TVShow {
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  first_air_date: string;
+  vote_average: number;
+  genre_ids?: number[];
+}
+
+export interface PaginatedResponse<T> {
+  page: number;
+  results: T[];
+  total_pages: number;
+  total_results: number;
 }

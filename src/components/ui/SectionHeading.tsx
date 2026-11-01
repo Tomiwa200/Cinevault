@@ -1,6 +1,5 @@
-import type {
-  ReactNode,
-} from "react";
+
+import type { ReactNode } from "react";
 
 interface SectionHeadingProps {
   title: string;
@@ -14,14 +13,14 @@ export function SectionHeading({
   action,
 }: SectionHeadingProps) {
   return (
-    <div className="mb-5 flex items-end justify-between gap-4">
+    <div className="mb-6 flex items-end justify-between gap-4">
       <div>
-        <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+        <h2 className="text-2xl font-bold text-text-primary">
           {title}
         </h2>
 
         {description && (
-          <p className="mt-1 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-text-secondary">
             {description}
           </p>
         )}

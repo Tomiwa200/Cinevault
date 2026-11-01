@@ -4,10 +4,9 @@
 
 @theme inline {
   /* Brand colors */
-  --color-brand-400: var(--cv-brand-400);
-  --color-brand-500: var(--cv-brand-500);
-  --color-brand-600: var(--cv-brand-600);
-
+  --color-brand: var(--cv-brand);
+  --color-brand-elevated: var(--cv-brand-elevated);
+  
   /* Backgrounds */
   --color-bg: var(--cv-bg);
   --color-surface: var(--cv-surface);
