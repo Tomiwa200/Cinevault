@@ -1,44 +1,59 @@
-const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-const TMDB_ACCESS_TOKEN =
-  import.meta.env.VITE_TMDB_ACCESS_TOKEN as string | undefined;
+const BASE_URL = "https://api.themoviedb.org/3";
+const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
-interface RequestOptions {
-  signal?: AbortSignal;
-}
+import type { Movie, PaginatedResponse } from "../../types/media";
 
-export async function tmdbFetch<T>(
-  endpoint: string,
-  params: Record<string, string | number | undefined> = {},
-  options: RequestOptions = {},
-): Promise<T> {
-  if (!TMDB_ACCESS_TOKEN) {
+ async function tmdbFetch<T>(
+ path: string,
+ params: Record<string, string> = {},
+ signal?: AbortSignal
+): Promise<T>{
+   if (!API_KEY) {
     throw new Error(
-      "TMDB access token is missing. Check your .env.local file.",
+      "TMDB API key is missing"
     );
   }
 
-  const url = new URL(`${TMDB_BASE_URL}${endpoint}`);
+  const url = new URL(`${BASE_URL}${path}`);
 
-  for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined && value !== "") {
-      url.searchParams.set(key, String(value));
-    }
-  }
+  url.searchParams.set('api_key', API_KEY);
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
-      Accept: "application/json",
-    },
-    signal: options.signal,
-  });
+ for(const [key, value] of Object.entries(params)){
+   url.searchParams.set(key, value);
+ }
 
-  if (!response.ok) {
+ const response = await fetch(url, { signal });
+
+ if (!response.ok) {
     throw new Error(
-      `TMDB request failed: ${response.status} ${response.statusText}`,
+      `TMDB request failed: ${response.status} ${response.statusText}`
     );
   }
 
   return (await response.json()) as T;
+}
+
+export function getTrendingMovies(
+  timeWindow: "day" | "week",
+  page = 1,
+  signal?: AbortSignal
+): Promise<PaginatedResponse<Movie>> {
+  return tmdbFetch<PaginatedResponse<Movie>>(
+    `/trending/movie/${timeWindow}`,
+    { page: String(page) },
+    signal
+  );
+}
+
+export function getPopularMovies(
+  page = 1,
+  signal?: AbortSignal
+): Promise<PaginatedResponse<Movie>> {
+  return tmdbFetch<PaginatedResponse<Movie>>(
+    "/movie/popular",
+    { page: String(page) },
+    signal
+  );
 }
