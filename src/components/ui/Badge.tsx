@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "../../utils/cn";
 
 
 
@@ -15,7 +16,7 @@ export function Badge({
 }: BadgeProps) {
   return (
     <span
-    className={`bg-brand text-white hover:bg-brand-600 rounded-lg px-4 py-[6px] font-medium transition-colors ${className}`}
+    className={cn("bg-warning text-white hover:bg-brand-600 rounded-lg px-2 py-1 font-medium transition-colors", className)}
     >
       {children}
     </span>

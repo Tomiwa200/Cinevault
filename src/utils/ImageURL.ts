@@ -3,7 +3,7 @@ const IMAGE_BASE_URL =
 
 export function getPosterUrl(
   path: string | null,
-  size: "w342" | "w500" | "w780" | "w1280" | "w1920" = "w500",
+  size: "w342" | "w500" | "w780" | "w1280" | "w1920" | "original" = "w500",
 ): string | null {
   if (!path) {
     return null;

@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
+import  { cn } from "../../utils/cn";
 
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "outline";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: ButtonVariant;
   disabled?: boolean;
@@ -20,6 +21,7 @@ const variantStyles: Record<ButtonVariant, string> = {
 export function Button({
   children,
   variant = "primary",
+  className = "",
   disabled = false,
   onClick,
 }: ButtonProps) {
@@ -28,7 +30,10 @@ export function Button({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`rounded-lg px-4 py-2 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 disabled:cursor-not-allowed disabled:opacity-50 ${variantStyles[variant]}`}
+      className={cn("rounded-lg px-4 py-2 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 disabled:cursor-not-allowed disabled:opacity-50",
+         variantStyles[variant],
+         className
+      )}
     >
       {children}
     </button>
